@@ -6,7 +6,7 @@
 import os
 from os import getenv
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 from models.base_model import Base, BaseModel
 from models.user import User
 from models.state import State
