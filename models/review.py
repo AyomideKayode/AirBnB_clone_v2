@@ -11,7 +11,7 @@ from sqlalchemy import Column, String, ForeignKey
 storage_type = getenv("HBNB_TYPE_STORAGE")
 
 
-class Review(BaseModel):
+class Review(BaseModel, Base):
     """ Review class to store review information
     """
     __tablename__ = "reviews"
