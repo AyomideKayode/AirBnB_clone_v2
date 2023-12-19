@@ -22,7 +22,7 @@ class City(BaseModel, Base):
         # Import Place model conditionally
         from models.place import Place
         places = relationship("Place", backref="cities",
-                              cascade="all, delete, delete")
+                              cascade="all, delete, delete-orphan")
     else:
         state_id = ""
         name = ""
