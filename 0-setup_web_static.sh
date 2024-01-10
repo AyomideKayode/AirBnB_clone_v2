@@ -33,12 +33,13 @@ server {
     server_name _;
 
     location / {
-        add_header X-Served-By \$hostname;
+        add_header X-Served-By $hostname;
         proxy_pass http://127.0.0.1:5000;
     }
 
     location /hbnb_static {
-        alias /data/web_static/current/;
+        alias /data/web_static/current;
+        index index.html index.htm;
     }
     $config_content
 }"
