@@ -1,34 +1,42 @@
 # Python packages
 
-* Read: [Packages](https://docs.python.org/3.4/tutorial/modules.html#packages)
+- Read: [Packages](https://docs.python.org/3.4/tutorial/modules.html#packages)
 
 A Python file can be a module, but when this file is in a folder, we call this folder a package. File organization is really important in a big project. This means for Python: packages everywhere.
 
 ## Compare with C
 
 In C:
+
 ```c
 #include "abs.h"
 ```
 
 In Python:
+
 ```py
 import abs
 abs.my_abs(89)
 ```
+
 or
+
 ```py
 from abs import my_abs
 my_abs(89)
 ```
+
 In C: `#include "my_math/abs.h"`
 
 In Python:
+
 ```py
 import my_math.abs
 my_math.abs.my_abs(89)
 ```
+
 or
+
 ```py
 import my_math.abs
 my_math.abs.my_abs(89)
@@ -37,6 +45,7 @@ my_math.abs.my_abs(89)
 ## Dotted module names == Path
 
 Let’s take this example of file organization:
+
 ```py
 my_script.py
 my_math/
@@ -45,11 +54,11 @@ my_math/
 
 - How can I use my function `my_abs(a)` from the file `abs.py` in `my_script.py`?
 
-	- `import my_math/abs.py` => NO
-	- `import my_math/abs` => NO
-	- `import my_math.abs.py` => NO
-	- `import my_math.abs` => YES but you will use your function like that: `my_math.abs.my_abs(89)` => not friendly
-	- `from my_math.abs import my_abs` => YES YES YES! now you can use your function like that: `my_abs(89)`
+  - `import my_math/abs.py` => NO
+  - `import my_math/abs` => NO
+  - `import my_math.abs.py` => NO
+  - `import my_math.abs` => YES but you will use your function like that: `my_math.abs.my_abs(89)` => not friendly
+  - `from my_math.abs import my_abs` => YES YES YES! now you can use your function like that: `my_abs(89)`
 
 Wait, does this really work?
 
@@ -57,9 +66,10 @@ NO! something is missing: the magic file `__init__.py`
 
 Indeed, each folder must contain this file to be considered a package.
 
-This file should be empty except if you want to import all the content of modules by using *.
+This file should be empty except if you want to import all the content of modules by using \*.
 
 More complicated?
+
 ```sh
 my_script.py
 my_math/
@@ -69,6 +79,7 @@ my_math/
         __init__.py
         add.py
 ```
+
 How can I use my function `my_add(a, b)` from the file `add.py` in `my_script.py`?
 
 `from my_math.functions.add import my_add`
@@ -78,6 +89,7 @@ Easy right?
 ## `import *` is dangerous
 
 Using `import *` is still considered bad practice in production code. In that case, `__init__.py` shouldn’t be empty but must contain the list of modules to load:
+
 ```sh
 my_script.py
 my_math/
@@ -90,6 +102,7 @@ my_math/
         mul.py
         div.py
 ```
+
 ```sh
 $ cat my_script.py
 from my_math.functions import *
@@ -114,6 +127,7 @@ $
 ## Relative versus Absolute import
 
 In this example:
+
 ```sh
 my_script.py
 my_math/
@@ -121,14 +135,16 @@ my_math/
     abs.py
     positive.py
 ```
+
 `positive.py` contains one function `def is_positive(n)` and this function uses `my_abs(n)`. How it’s possible?
 
 By importing: `from my_math.abs import my_abs` or `from abs import my_abs`
 
-* What the difference?
+- What the difference?
 
-	- `from abs import my_abs` is using a relative path between your file who imports and the module to import
-	- `from my_math.abs import my_abs` is using an absolute path between the file you execute and the module to import
+  - `from abs import my_abs` is using a relative path between your file who imports and the module to import
+  - `from my_math.abs import my_abs` is using an absolute path between the file you execute and the module to import
+
 ```sh
 $ cat my_script.py
 from my_math.positive import is_positive
@@ -142,7 +158,9 @@ False
 True
 $
 ```
+
 Now, let’s execute a file in `my_math`:
+
 ```sh
 $ cd my_math ; cat test_positive.py
 from positive import is_positive
@@ -165,9 +183,11 @@ Traceback (most recent call last):
 ImportError: No module named 'my_math'
 $
 ```
+
 Ahh! If you are using an absolute path, you can’t execute this module from another point as the “root” of your project.
 
 Let’s change to relative path:
+
 ```sh
 $ cd my_math ; cat test_positive.py
 from positive import is_positive
