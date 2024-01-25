@@ -117,9 +117,40 @@ guillaume@ubuntu:~$ curl 0.0.0.0:5000/c
 guillaume@ubuntu:~$ 
 ```
 
+3. [Python is cool!](./3-python_route.py) :
+
+Write a script that starts a Flask web application:
+
+- Your web application must be listening on `0.0.0.0`, port `5000`
+- Routes:
+  - `/`: display “Hello HBNB!”
+  - `/hbnb`: display “HBNB”
+  - `/c/<text>`: display “C ” followed by the value of the text variable (replace underscore _ symbols with a space )
+  - `/python/<text>`: display “Python ”, followed by the value of the text variable (replace underscore _ symbols with a space )
+    - The default value of text is “is cool”
+- You must use the option `strict_slashes=False` in your route definition
+
+```sh
+guillaume@ubuntu:~/AirBnB_v2$ python3 -m web_flask.3-python_route
+* Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+....
+```
+
+In another tab:
+
+```sh
+guillaume@ubuntu:~$ curl -Ls 0.0.0.0:5000/python/is_magic ; echo "" | cat -e
+Python is magic$
+guillaume@ubuntu:~$ curl -Ls 0.0.0.0:5000/python ; echo "" | cat -e
+Python is cool$
+guillaume@ubuntu:~$ curl -Ls 0.0.0.0:5000/python/ ; echo "" | cat -e
+Python is cool$
+guillaume@ubuntu:~$ 
+```
+
 | Task                 | File                                                                                                                               |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| 3. Python is cool!   | [3-python_route.py](./3-python_route.py)                                                                                           |
+|                                                                                            |
 | 4. Is it a number?   | [4-number_route.py](./4-number_route.py)                                                                                           |
 | 5. Number template   | [5-number_template.py](./5-number_template.py), [templates/5-number.html](./templates/5-number.html)                               |
 | 6. Odd or even?      | [6-number_odd_or_even.py](./6-number_odd_or_even.py), [templates/6-number_odd_or_even.html](./templates/6-number_odd_or_even.html) |
